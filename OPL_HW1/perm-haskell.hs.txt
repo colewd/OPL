@@ -1,0 +1,21 @@
+--getperms function taken by rosettacode.org/wiki/Permutations#Haskell
+--getperms takes a list and returns a list of lists (permutations)
+getperms :: [a] -> [[a]]
+
+--if list is empty return empty
+getperms [] = [[]]
+
+--given a list, choose and element from the list
+--recursively permute the remainder
+getperms xs = [ y:zs | (y,ys) <- select xs, zs <- getperms ys]
+
+--selects returns a list of pairs
+--each pair represents a selction for the list
+       where select [] = []
+                select (x:xs) = (x,xs) : [ (y,x:ys) | (y,ys) <- select xs ]
+
+--perms function declaration
+--takes an int (n) and returns a list of lists of ints (a list of permutations)
+perms :: Int -> [[Int]]
+--perms converts the int argument to a list and calls getperms
+perms n = getperms [1..n]

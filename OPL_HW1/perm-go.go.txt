@@ -1,0 +1,45 @@
+// solution taken from https://gist.github.com/manorie/20874a3c59e9fdfb4e184cac4130944d
+
+package main
+
+import ("fmt"
+       "os"
+       "strconv")
+
+//getperms takes a list argument and integer size arg
+func getperms(a []int, size int) {
+
+     //when size is 1, print the list
+     if size == 1 {
+           fmt.Println(a)
+    }
+
+     //generate (n-1)! permutations of the first n-1 elements
+     //and concat left out element repeatedly until i == n
+     for i := 0; i < size; i++ {
+            getperms(a, size-1); //recursively generate each permutation
+
+       //if size is odd, switch first and last element
+       //otherwise switch ith and last element
+       if size%2 == 1 {
+          a[0], a[size-1] = a[size-1], a[0]
+       } else {
+         a[i], a[size-1] = a[size-1], a[i]
+       }
+    }
+}
+
+func main() {
+
+     //take a command line argument and conert to integer
+     n, _ := strconv.Atoi(os.Args[1])
+
+     //create a list of size of argument
+     list := make([]int, n)
+
+     //set each element in the list to i (1 to n)
+     for i:= range list { list[i] = i + 1 }
+
+     //call getperms with generated list and size of list
+     getperms(list, len(list))
+}

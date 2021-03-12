@@ -1,0 +1,10 @@
+:- use_module(library(clpfd)).
+
+    
+permut_clpfd(L, N) :-
+    length(L, N),     %! There are N elements in the list L
+    L ins 1..N,       %! Says in list L there are N elements and it starts at 1
+    all_different(L), %! Makes sure we don't have any repeat variables 
+    label(L).         %! Assigns a value to each variable in L
+
+%! found at https://rosettacode.org/wiki/Permutations#Prolog
