@@ -1,0 +1,6 @@
+type parse_tree =   (* among other things, parse_trees are *)
+    | PT_error          (* the elements of the attribute stack *)
+    | PT_id of string
+    | PT_num of string
+    | PT_term of string
+    | PT_nt of (string * parse_tree list);;
